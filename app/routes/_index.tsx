@@ -13,12 +13,12 @@ import type { ActionFunctionArgs } from "@remix-run/node";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const body = new URLSearchParams(await request.text());
-  const scannable_id = body.get("scannable_id") ? parseInt(body.get("scannable_id") as string, 10) : null;
+  const scannable_id = body.get("scannable_id") ?? null;
   const category = body.get("category");
   const name = body.get("name");
   const action = body.get("action");
 
-  await createScannable(scannable_id as number, category as string, name as string, action as string);
+  await createScannable(scannable_id as string, category as string, name as string, action as string);
   
   return json({ success: true });
 }
@@ -33,7 +33,7 @@ export default function Index() {
             Welcome to Astro UI
           </h1>
         </header>
-        <nav className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-gray-200 p-6 dark:border-gray-700">
+        <nav className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-gray-200 p-6 dark:border-gray-700">
           <p className="leading-6 text-gray-700 dark:text-gray-200">
             Scannables
           </p>
@@ -54,34 +54,46 @@ export default function Index() {
             New Scannable
           </p>
           <Form method="post">
-            <input
-              type="number"
-              name="scannable_id"
-              placeholder="Scannable ID"
-              required
-              className="input"
-            />
-            <input
-              type="text"
-              name="category"
-              placeholder="Category"
-              required
-              className="input"
-            />
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              required
-              className="input"
-            />
-            <input
-              type="text"
-              name="action"
-              placeholder="Action"
-              required
-              className="input"
-            />
+            <div className="form_field">
+              <label htmlFor="scannable_id" className="label">Scannable ID</label>
+              <input
+                type="text"
+                name="scannable_id"
+                placeholder="Scannable ID"
+                required
+                className="input"
+              />
+            </div>
+            <div className="form_field">
+              <label htmlFor="category" className="label">Category</label>
+              <input
+                type="text"
+                name="category"
+                placeholder="Category"
+                required
+                className="input"
+              />
+            </div>
+            <div className="form_field">
+              <label htmlFor="name" className="label">Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                required
+                className="input"
+              />
+            </div>
+            <div className="form_field">
+              <label htmlFor="action" className="label">Action</label>
+              <input
+                type="text"
+                name="action"
+                placeholder="Action"
+                required
+                className="input"
+              />
+            </div>
             <div>
               <button type="submit" className="btn">
                 Create

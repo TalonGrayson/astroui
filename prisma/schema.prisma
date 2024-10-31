@@ -12,7 +12,7 @@ datasource db {
 
 model Scannable {
   id            Int     @id @default(autoincrement())
-  scannable_id  Int     @unique
+  scannable_id  String     @unique
   category      String
   name          String
   action        String

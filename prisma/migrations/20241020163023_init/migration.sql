@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "Scannable" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "scannable_id" INTEGER NOT NULL,
+    "scannable_id" TEXT NOT NULL,
     "category" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "action" TEXT NOT NULL
